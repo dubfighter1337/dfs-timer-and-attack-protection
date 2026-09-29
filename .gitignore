@@ -14,3 +14,4 @@ TESTING.md
 scripts/
 .github/
 src/test/java/com/dfsready/*Test.java
+local.ps1
