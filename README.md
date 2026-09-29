@@ -27,28 +27,6 @@ Hides NPC and player **Attack** options when the configured equipment is not equ
 
 Blank slots are ignored. Item names are case-insensitive. DFS **Activate** remains available. This feature does not stop combat already in progress or disable auto-retaliate.
 
-## Download and run
-
-The plugin is not currently available in the RuneLite Plugin Hub. These steps start a separate RuneLite client with the plugin loaded.
-
-1. [Download the source ZIP](https://github.com/dubfighter1337/dfs-timer-and-attack-protection/archive/refs/heads/main.zip) and extract it.
-2. Install **JDK 17** and set `JAVA_HOME` to the JDK installation folder.
-3. Open a terminal in the extracted folder and run:
-
-   **Windows PowerShell**
-   ```powershell
-   powershell -ExecutionPolicy Bypass -File .\local.ps1 run
-   ```
-
-   **macOS / Linux**
-   ```bash
-   bash ./gradlew run
-   ```
-
-4. Find **DFS Timer and Attack Protection** in the plugin list. Settings have separate **DFS Timer** and **Attack Protection** sections.
-
-The first launch downloads the required build files. Jagex accounts require RuneLite's [development login setup](https://github.com/runelite/wiki/blob/master/Using-Jagex-Accounts.md). Credential files must remain private.
-
 ## License
 
 Plugin code and the bundled chime use [CC0 1.0](LICENSE): free to use, modify and share, without attribution requirements. Included third-party build tools retain their existing licenses.
