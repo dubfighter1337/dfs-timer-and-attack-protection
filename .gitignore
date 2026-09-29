@@ -1,0 +1,12 @@
+.tools/
+.gradle/
+build/
+*.log
+.idea/
+*.iml
+verification/
+credentials.properties
+**/credentials.properties
+.runelite/
+.env
+.env.*
