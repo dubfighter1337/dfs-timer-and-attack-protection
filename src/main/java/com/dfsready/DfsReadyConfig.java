@@ -35,7 +35,7 @@ public interface DfsReadyConfig extends Config
     @ConfigItem(keyName = "equippedOnly", name = "Only alert while equipped", description = "Suppress the alert if the DFS is no longer equipped when the warning is due", position = 4, section = TIMER_SECTION)
     default boolean equippedOnly() { return false; }
 
-    @ConfigItem(keyName = "hideAttackWithoutLoadout", name = "Enable attack protection", description = "Hide Attack unless all filled equipment fields match. Blank fields are ignored. Does not stop combat already in progress.", position = 5, section = ATTACK_SECTION)
+    @ConfigItem(keyName = "hideAttackWithoutLoadout", name = "Enable PvE attack protection", description = "Hide NPC Attack unless all filled equipment fields match. Disabled in PvP areas/worlds; player entries are never changed. Does not stop existing combat.", position = 5, section = ATTACK_SECTION)
     default boolean hideAttackWithoutLoadout() { return false; }
 
     @ConfigItem(keyName = "playChime", name = "Play soft chime", description = "Play one gentle chime when the red flash starts. No Windows notification sound.", position = 6, section = TIMER_SECTION)

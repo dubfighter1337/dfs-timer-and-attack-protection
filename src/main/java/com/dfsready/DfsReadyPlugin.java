@@ -3,6 +3,7 @@ package com.dfsready;
 import com.google.inject.Provides;
 import java.awt.TrayIcon;
 import java.util.Arrays;
+import java.util.EnumSet;
 import javax.inject.Inject;
 import net.runelite.api.Client;
 import net.runelite.api.EquipmentInventorySlot;
@@ -13,6 +14,7 @@ import net.runelite.api.ItemContainer;
 import net.runelite.api.ItemComposition;
 import net.runelite.api.MenuAction;
 import net.runelite.api.MenuEntry;
+import net.runelite.api.WorldType;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.PostMenuSort;
@@ -122,7 +124,7 @@ public class DfsReadyPlugin extends Plugin
     public void onPostMenuSort(PostMenuSort event)
     {
         if (!config.hideAttackWithoutLoadout() || client.getGameState() != GameState.LOGGED_IN
-            || client.isMenuOpen() || attackLoadoutEquipped())
+            || client.isMenuOpen() || isPvpContext() || attackLoadoutEquipped())
         {
             return;
         }
@@ -149,6 +151,17 @@ public class DfsReadyPlugin extends Plugin
             && (requiredShield.isEmpty() || matchesItem(shield, requiredShield));
     }
 
+    private boolean isPvpContext()
+    {
+        EnumSet<WorldType> worldTypes = client.getWorldType();
+        return worldTypes == null || WorldType.isPvpWorld(worldTypes)
+            || worldTypes.contains(WorldType.DEADMAN)
+            || worldTypes.contains(WorldType.PVP_ARENA)
+            || client.getVarbitValue(VarbitID.INSIDE_WILDERNESS) != 0
+            || client.getVarbitValue(VarbitID.PVP_AREA_CLIENT) != 0
+            || client.getVarbitValue(VarbitID.PVP_ADJACENT_AREA_CLIENT) != 0;
+    }
+
     private boolean matchesItem(Item item, String required)
     {
         if (item == null) { return false; }
@@ -167,10 +180,6 @@ public class DfsReadyPlugin extends Plugin
         MenuAction type = entry.getType();
         return type == MenuAction.NPC_FIRST_OPTION || type == MenuAction.NPC_SECOND_OPTION
             || type == MenuAction.NPC_THIRD_OPTION || type == MenuAction.NPC_FOURTH_OPTION
-            || type == MenuAction.NPC_FIFTH_OPTION || type == MenuAction.PLAYER_FIRST_OPTION
-            || type == MenuAction.PLAYER_SECOND_OPTION || type == MenuAction.PLAYER_THIRD_OPTION
-            || type == MenuAction.PLAYER_FOURTH_OPTION || type == MenuAction.PLAYER_FIFTH_OPTION
-            || type == MenuAction.PLAYER_SIXTH_OPTION || type == MenuAction.PLAYER_SEVENTH_OPTION
-            || type == MenuAction.PLAYER_EIGHTH_OPTION;
+            || type == MenuAction.NPC_FIFTH_OPTION;
     }
 }

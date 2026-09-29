@@ -11,7 +11,7 @@ repositories {
     mavenCentral()
 }
 
-def runeLiteVersion = '1.12.39'
+def runeLiteVersion = '1.13.0'
 dependencies {
     compileOnly "net.runelite:client:$runeLiteVersion"
     testImplementation "net.runelite:client:$runeLiteVersion"

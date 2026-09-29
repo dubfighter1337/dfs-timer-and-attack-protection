@@ -19,7 +19,7 @@ Desktop notifications depend on system notification settings. The option does no
 
 ## Attack Protection
 
-Hides NPC and player **Attack** options when the configured equipment is not equipped. Off by default.
+Hides NPC **Attack** options when the configured equipment is not equipped. Off by default. Player menu entries are never changed. Protection is disabled on PvP/Deadman/PvP Arena worlds and in detected PvP, adjacent PvP and Wilderness areas.
 
 **The default is bronze crossbow and DFS.** The weapon and shield fields accept exact item names or item IDs.
 
