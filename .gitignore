@@ -10,3 +10,7 @@ credentials.properties
 .runelite/
 .env
 .env.*
+TESTING.md
+scripts/
+.github/
+src/test/java/com/dfsready/*Test.java

@@ -16,8 +16,11 @@ dependencies {
     compileOnly "net.runelite:client:$runeLiteVersion"
     testImplementation "net.runelite:client:$runeLiteVersion"
     testImplementation "net.runelite:jshell:$runeLiteVersion"
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.mockito:mockito-inline:4.11.0'
+    // Local verification files are not included in the downloadable plugin source.
+    if (!fileTree('src/test/java').matching { include '**/*Test.java' }.isEmpty()) {
+        testImplementation 'junit:junit:4.13.2'
+        testImplementation 'org.mockito:mockito-inline:4.11.0'
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {
