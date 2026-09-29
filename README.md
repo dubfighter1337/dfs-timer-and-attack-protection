@@ -10,9 +10,12 @@ Flashes the game screen red when the DFS cooldown finishes.
 - Optional soft chime with adjustable volume. Off by default.
 - Optional on-screen message.
 - Advance warning from 0–10 seconds. Early warnings are approximate; 0 waits for cooldown completion.
-- One alert per cooldown. No Windows notifications.
+- Optional Windows / desktop notification. Off by default.
+- One alert per cooldown; desktop notifications use the same advance-warning setting.
 
 The default flash lasts two seconds. **Duration (ms)** accepts 200–30000; enter **5000** for five seconds. Cooldown completion does not guarantee that charges remain.
+
+Desktop notifications depend on system notification settings. The option does not add a RuneLite notification beep or take window focus; the soft chime remains a separate setting.
 
 ## Attack Protection
 

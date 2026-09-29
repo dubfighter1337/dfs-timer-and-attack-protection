@@ -1,6 +1,7 @@
 package com.dfsready;
 
 import com.google.inject.Provides;
+import java.awt.TrayIcon;
 import java.util.Arrays;
 import javax.inject.Inject;
 import net.runelite.api.Client;
@@ -18,6 +19,11 @@ import net.runelite.api.events.PostMenuSort;
 import net.runelite.api.gameval.ItemID;
 import net.runelite.api.gameval.VarbitID;
 import net.runelite.client.config.ConfigManager;
+import net.runelite.client.Notifier;
+import net.runelite.client.config.Notification;
+import net.runelite.client.config.NotificationSound;
+import net.runelite.client.config.RequestFocusType;
+import net.runelite.client.config.FlashNotification;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
@@ -27,11 +33,19 @@ import net.runelite.client.util.Text;
 @PluginDescriptor(name = "DFS Timer and Attack Protection", description = "Dragonfire shield cooldown alerts and optional equipment-based Attack menu protection", tags = {"dragonfire", "shield", "cooldown", "flash"})
 public class DfsReadyPlugin extends Plugin
 {
+    private static final Notification DESKTOP_ALERT = new Notification()
+        .withEnabled(true).withInitialized(true).withOverride(true)
+        .withTray(true).withTrayIconType(TrayIcon.MessageType.INFO)
+        .withRequestFocus(RequestFocusType.OFF).withSound(NotificationSound.OFF)
+        .withFlash(FlashNotification.DISABLED).withGameMessage(false)
+        .withSendWhenFocused(true).withTimeout(5000);
+
     @Inject private Client client;
     @Inject private DfsReadyConfig config;
     @Inject private OverlayManager overlayManager;
     @Inject private DfsReadyOverlay overlay;
     @Inject private DfsReadyChime chime;
+    @Inject private Notifier notifier;
     private final CooldownTracker tracker = new CooldownTracker();
 
     @Provides
@@ -87,6 +101,12 @@ public class DfsReadyPlugin extends Plugin
             if (config.playChime())
             {
                 chime.play(config.chimeVolume());
+            }
+            if (config.desktopNotification())
+            {
+                notifier.notify(DESKTOP_ALERT, cooldown > 0
+                    ? "DFS cooldown ending soon."
+                    : "DFS cooldown finished.");
             }
         }
     }

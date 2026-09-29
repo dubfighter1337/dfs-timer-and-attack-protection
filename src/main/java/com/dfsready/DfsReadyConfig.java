@@ -54,4 +54,7 @@ public interface DfsReadyConfig extends Config
     @Range(min = 0, max = 10)
     @ConfigItem(keyName = "warningOffset", name = "Warn early (seconds)", description = "Warn approximately 0-10 seconds before cooldown ends. 0 waits for confirmed readiness. One alert per cooldown.", position = 10, section = TIMER_SECTION)
     default int warningOffset() { return 0; }
+
+    @ConfigItem(keyName = "desktopNotification", name = "Windows / desktop notification", description = "Show one desktop notification when the cooldown alert fires. Off by default. Delivery depends on system notification settings.", position = 11, section = TIMER_SECTION)
+    default boolean desktopNotification() { return false; }
 }
